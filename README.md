@@ -1,9 +1,15 @@
 
-# Dealing With Missing Data
+# Dealing with Missing Data
 
 ## Introduction
 
-In this lesson, we'll learn about various strategies for detecting and dealing with missing data in using pandas.  
+In this lesson, we'll learn about various strategies for detecting and dealing with missing data using Pandas.  
+
+## Objectives
+You will be able to:
+* Detect missing data in Pandas using .describe(), .summary(), .isnull and .notnull
+* Replace/drop missing data in Pandas using .fillna and .dropna
+
 
 ## Why is Missing Data a Problem?
 
@@ -140,7 +146,7 @@ Often, null values inside a continuously-valued column will cause all sorts of h
 Once we have binned the data in a new column, we can throw out the numerical version of the column, and just leave the missing values as one more valid category inside our new categorical column!
 
 
-# Conclusion
+## Summary
 
 In this section, we learned:
 
