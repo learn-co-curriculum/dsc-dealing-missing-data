@@ -31,13 +31,13 @@ By default, pandas represents null values with `NaN`, which is short for **_Not 
 #### Example--Detecting Null Values
 
 ```python
-some_dataframe.isna()
+df.isna()
 ```
 
 Returns a matrix of boolean values, where all cells containing `NaN` are converted to `True`, and all cells containing valid data are converted to `False`
 
 ```python
-some_dataframe.isna().sum()
+df.isna().sum()
 ```
 
 Since `True` is equivalent to `1` and `False` is equivalent to `0` in python, taking the `.sum()` of the DataFrame (or Series) will return the total number of `NaN` values in the dataset.  Pandas even breaks this down by column--see the example output below.
@@ -123,7 +123,7 @@ For continuous data, the best solution is to replace the missing values with the
 Pandas provides an easy way for us to replace null values.  For instance, if we wanted to replace all null values in the `Fare` column with the column median, we would type:
 
 ```python
-dataframe['Fare'].fillna(df['Fare'].median())
+df['Fare'].fillna(df['Fare'].median())
 ```
 
 #### Categorical Data
