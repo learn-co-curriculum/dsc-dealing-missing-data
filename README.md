@@ -58,7 +58,7 @@ Cabin          687
 Embarked         2
 ### Placeholder Values
 
-Often, datasets will contain missing values that are denoted by a value that seems valid to pandas.  This is very common in real-world datasets--often, people entering the data are required to enter values that they don't actually have, so they enter an agreed upon placeholder value.  
+Often, datasets will contain missing values that are denoted by a value that seems valid to pandas.  This is very common in real-world datasets--often, people entering the data are required to enter values that they don't actually have, so they enter an agreed-upon placeholder value.  
 
 The easiest way to deal with these is to familiarize yourself with the data dictionary that corresponds to your data set--any placeholder values meant to denote a null value will be specified here. 
 
@@ -75,7 +75,7 @@ These are the most difficult to check for, since this requires getting decently 
 
 To detect these sorts of placeholder values, start by checking for outliers--they are often encoded as very large numbers, or as 0 (when 0 isn't a realistic value for the column in question).  Any good placeholder value will be a value that couldn't show up in the real world.  
 
-Another way to confirm these values is to check the `value_counts`.  In a continuously-valued column, it is probably rare for one specific value to overwhelm all the others.  If, for instance, you see the same numerical value showing up a statistically improbable number of times, double check that this value is real--placeholder values have the potential to show up many times, but it's much less likely for real-valued numbers.  
+Another way to confirm these values is to check the `value_counts`.  In a continuously-valued column, it is probably rare for one specific value to overwhelm all the others.  If, for instance, you see the same numerical value showing up a statistically improbable number of times, double-check that this value is real--placeholder values have the potential to show up many times, but it's much less likely for real-valued numbers.  
 
 
 #### Categorical Data
@@ -128,7 +128,7 @@ df['Fare'].fillna(df['Fare'].median())
 
 #### Categorical Data
 
-With categorical data, this is harder, since we don't have summary statistics to lean on such as median or mean. In this case, if one categorical value is much more common than others, it is a valid strategy to replace null values with this common value. However, make sure to examine your data first! If all the categorical values are equally common, picking one to replace all the null values may do more harm than good by skewing the distribution and introducing some false signal into your dataset.
+With categorical data, this is harder, since we don't have summary statistics to lean on such as the median or the mean. In this case, if one categorical value is much more common than others, it is a valid strategy to replace null values with this common value. However, make sure to examine your data first! If all the categorical values are equally common, picking one to replace all the null values may do more harm than good by skewing the distribution and introducing some false signal into your dataset.
 
 ### Keep 
 
