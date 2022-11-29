@@ -44,7 +44,7 @@ df.isna().sum()
 
 Since `True` is equivalent to `1` and `False` is equivalent to `0` in Python, taking the `.sum()` of the DataFrame (or Series) will return the total number of `NaN` values in the dataset.  Pandas even breaks this down by column -- see the example output below.
 
-#Number of NaNs the in Titanic dataset by column
+#Number of NaNs in the Titanic dataset by column
 
 PassengerId      0
 Survived         0
