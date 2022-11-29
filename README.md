@@ -101,7 +101,7 @@ Another way to confirm these values is to check the `.value_counts()` of a colum
 
 #### Categorical data
 
-To detect placeholder values in categorical data, get the unique values in the column and see if there are any values that don't match up with your expectations.  Pandas provides a built-in method for this.  For instance, in the titanic dataset, we can check the unique values of the `Embarked` column by typing:
+To detect placeholder values in categorical data, get the unique values in the column and see if there are any values that don't match up with your expectations.  Pandas provides a built-in method for this.  For instance, in the Titanic dataset, we can check the unique values of the `Embarked` column by typing:
 
 ```python
 df['Embarked'].unique()
@@ -123,7 +123,7 @@ The two main strategies for dealing with missing values are to drop columns or t
 
 #### Dropping columns
 
-Consider the output from the titanic dataset shown previously.  The `Cabins` column contains 687 missing values. The entire dataset only contains around 900 rows of data.  In this case, it makes more sense to just remove the `Cabins`  column from the dataset entirely.  
+Consider the output from the Titanic dataset shown previously.  The `Cabins` column contains 687 missing values. The entire dataset only contains around 900 rows of data.  In this case, it makes more sense to just remove the `Cabins`  column from the dataset entirely.  
 
 Note that while this makes sense for the `Cabins` column, this is not a good idea for dealing with the null values contained within the `Age` column. Although the `Age` column contains 75 missing values, the vast majority of the items in this dataset contain perfectly good information for the age column.  If we dropped this column, we would be throwing out all that information just to deal with a small subset of missing values in that column!
 
