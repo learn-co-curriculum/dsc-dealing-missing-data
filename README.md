@@ -1,4 +1,3 @@
-
 # Dealing with Missing Data
 
 ## Introduction
@@ -79,7 +78,7 @@ To detect these sorts of placeholder values, start by checking for outliers -- t
 
 However, you may also find actual outliers (values that are _not impossible_, but _occur rarely_). Outliers, like missing or corrupt data, can adversely effect your Machine Learning models. Some of the ways in which you can identify outliers are: 
 
-- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard devations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. 
+- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard deviations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. 
 
 
 <img src="images/normal_sd_new.png" width="600">
@@ -88,7 +87,7 @@ However, you may also find actual outliers (values that are _not impossible_, bu
 > You will learn more about normal distribution in a later lesson. 
 
 
-- **Interquartile range (IQR)**: If the data is not normally distribued, you can use the same method boxplots use to determine the outliers -- all observations that lie 1.5 times the IQR (difference between the 75th and the 25th percentiles of the data) away from the median in either direction are treated as outliers. 
+- **Interquartile range (IQR)**: If the data is not normally distributed, you can use the same method boxplots use to determine the outliers -- all observations that lie 1.5 times the IQR (difference between the 75th and the 25th percentiles of the data) away from the median in either direction are treated as outliers. 
 
 
 <img src="images/new_boxplot.png" width="600">
