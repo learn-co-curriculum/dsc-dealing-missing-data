@@ -1,4 +1,3 @@
-
 # Dealing with Missing Data
 
 ## Introduction
@@ -44,7 +43,7 @@ df.isna().sum()
 
 Since `True` is equivalent to `1` and `False` is equivalent to `0` in Python, taking the `.sum()` of the DataFrame (or Series) will return the total number of `NaN` values in the dataset.  Pandas even breaks this down by column -- see the example output below.
 
-#Number of NaNs in the Titanic dataset by column
+#Number of NaNs the in Titanic dataset by column
 
 PassengerId      0
 Survived         0
@@ -79,7 +78,7 @@ To detect these sorts of placeholder values, start by checking for outliers -- t
 
 However, you may also find actual outliers (values that are _not impossible_, but _occur rarely_). Outliers, like missing or corrupt data, can adversely effect your Machine Learning models. Some of the ways in which you can identify outliers are: 
 
-- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard devations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. 
+- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard deviations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. 
 
 
 <img src="images/normal_sd_new.png" width="600">
@@ -88,7 +87,7 @@ However, you may also find actual outliers (values that are _not impossible_, bu
 > You will learn more about normal distribution in a later lesson. 
 
 
-- **Interquartile range (IQR)**: If the data is not normally distribued, you can use the same method boxplots use to determine the outliers -- all observations that lie 1.5 times the IQR (difference between the 75th and the 25th percentiles of the data) away from the median in either direction are treated as outliers. 
+- **Interquartile range (IQR)**: If the data is not normally distributed, you can use the same method boxplots use to determine the outliers -- all observations that lie 1.5 times the IQR (difference between the 75th and the 25th percentiles of the data) away from the median in either direction are treated as outliers. 
 
 
 <img src="images/new_boxplot.png" width="600">
@@ -101,7 +100,7 @@ Another way to confirm these values is to check the `.value_counts()` of a colum
 
 #### Categorical data
 
-To detect placeholder values in categorical data, get the unique values in the column and see if there are any values that don't match up with your expectations.  Pandas provides a built-in method for this.  For instance, in the Titanic dataset, we can check the unique values of the `Embarked` column by typing:
+To detect placeholder values in categorical data, get the unique values in the column and see if there are any values that don't match up with your expectations.  Pandas provides a built-in method for this.  For instance, in the titanic dataset, we can check the unique values of the `Embarked` column by typing:
 
 ```python
 df['Embarked'].unique()
@@ -123,13 +122,13 @@ The two main strategies for dealing with missing values are to drop columns or t
 
 #### Dropping columns
 
-Consider the output from the Titanic dataset shown previously.  The `Cabins` column contains 687 missing values. The entire dataset only contains around 900 rows of data.  In this case, it makes more sense to just remove the `Cabins`  column from the dataset entirely.  
+Consider the output from the titanic dataset shown previously.  The `Cabins` column contains 687 missing values. The entire dataset only contains around 900 rows of data.  In this case, it makes more sense to just remove the `Cabins`  column from the dataset entirely.  
 
 Note that while this makes sense for the `Cabins` column, this is not a good idea for dealing with the null values contained within the `Age` column. Although the `Age` column contains 75 missing values, the vast majority of the items in this dataset contain perfectly good information for the age column.  If we dropped this column, we would be throwing out all that information just to deal with a small subset of missing values in that column!
 
 #### Dropping rows
 
-In the above example, dropping all rows that contain a null value would be a very bad idea, because we would lose 3/4 of our data! Dropping rows makes more sense when the proportion of rows with missing values is very small compared to the size of the overall dataset -- it's okay to just throw out the missing values as long as it's not too many observations. There's no hard rule for exactly how many missing values is the right amount to throw out, and will vary project by project.  Think critically, and use your best judgment!
+In the above example, dropping all rows that contain a null value would be a very bad idea, because we would 3/4 of our data! Dropping rows makes more sense when the proportion of rows with missing values is very small compared to the size of the overall dataset -- it's okay to just throw out the missing values as long as it's not too many observations. There's no hard rule for exactly how many missing values is the right amount to throw out, and will vary project by project.  Think critically, and use your best judgment!
 
 To drop all rows containing missing values in a DataFrame, use `dataframe.dropna()`.  Note that this returns a copy of the dataframe with the rows in question dropped -- however, you can mutate the DataFrame in place by passing in `inplace=True` as a parameter to the method call. 
 
