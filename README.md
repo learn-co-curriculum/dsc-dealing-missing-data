@@ -43,20 +43,20 @@ df.isna().sum()
 
 Since `True` is equivalent to `1` and `False` is equivalent to `0` in Python, taking the `.sum()` of the DataFrame (or Series) will return the total number of `NaN` values in the dataset.  Pandas even breaks this down by column -- see the example output below.
 
-#Number of NaNs the in Titanic dataset by column
+Number of NaNs the in Titanic dataset by column
 
-PassengerId      0
-Survived         0
-Pclass           0
-Name             0
-Sex              0
-Age            177
-SibSp            0
-Parch            0
-Ticket           0
-Fare             0
-Cabin          687
-Embarked         2
+PassengerId 0
+Survived 0
+Pclass 0
+Name 0
+Sex 0
+Age 177
+SibSp 0
+Parch 0
+Ticket 0
+Fare 0
+Cabin 687
+Embarked 2
 ### Placeholder values
 
 Often, datasets will contain missing values that are denoted by a value that seems valid to pandas.  This is very common in real-world datasets -- often, people entering the data are required to enter values that they don't actually have, so they enter an agreed-upon placeholder value.  
