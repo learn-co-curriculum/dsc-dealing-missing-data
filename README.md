@@ -46,17 +46,7 @@ Since `True` is equivalent to `1` and `False` is equivalent to `0` in Python, ta
 Number of NaNs the in Titanic dataset by column
 
 ```python
-PassengerId 0
-Survived 0
-Pclass 0
-Name 0
-Sex 0
-Age 177
-SibSp 0
-Parch 0
-Ticket 0
-Fare 0
-Cabin 687
+PassengerId 0 Survived 0 Pclass 0 Name 0 Sex 0 Age 177 SibSp 0 Parch 0 Ticket 0 Fare 0 Cabin 687
 ```
 Embarked 2
 ### Placeholder values
