@@ -57,9 +57,8 @@ Parch 0
 Ticket 0
 Fare 0
 Cabin 687
-Embarked 2
 ```
-
+Embarked 2
 ### Placeholder values
 
 Often, datasets will contain missing values that are denoted by a value that seems valid to pandas.  This is very common in real-world datasets -- often, people entering the data are required to enter values that they don't actually have, so they enter an agreed-upon placeholder value.  
