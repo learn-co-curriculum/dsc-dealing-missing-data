@@ -85,7 +85,7 @@ However, you may also find actual outliers (values that are _not impossible_, bu
 - **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard deviations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. 
 
 
-<img src="images/normal_sd_new.png" width="600">
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/normal_sd_new.png" width="600">
 
 
 > You will learn more about normal distribution in a later lesson. 
@@ -94,7 +94,7 @@ However, you may also find actual outliers (values that are _not impossible_, bu
 - **Interquartile range (IQR)**: If the data is not normally distributed, you can use the same method boxplots use to determine the outliers -- all observations that lie 1.5 times the IQR (difference between the 75th and the 25th percentiles of the data) away from the median in either direction are treated as outliers. 
 
 
-<img src="images/new_boxplot.png" width="600">
+<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/new_boxplot.png" width="600">
 
 
 > If you need a refresher on IQR, refer to the lesson on _Measures of Dispersion_ in the _Importing and Statistical Analysis of Data_ section of Module 1.
