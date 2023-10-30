@@ -116,7 +116,7 @@ Note that for categorical columns, it is much more likely to have a data diction
 
 ## Strategies for dealing with missing data
 
-Detecting missing values isn't enough -- we need to deal with them in order to move forward! We have three options for dealing with missing values -- removing them from the dataset, keeping them, or replacing them with another value. 
+Detecting missing values isn't enough -- we need to deal with them in order to move forward. We have three options for dealing with missing values -- removing them from the dataset, keeping them, or replacing them with another value. 
 
 ### Remove
 
@@ -128,11 +128,11 @@ The two main strategies for dealing with missing values are to drop columns or t
 
 Consider the output from the titanic dataset shown previously.  The `Cabins` column contains 687 missing values. The entire dataset only contains around 900 rows of data.  In this case, it makes more sense to just remove the `Cabins`  column from the dataset entirely.  
 
-Note that while this makes sense for the `Cabins` column, this is not a good idea for dealing with the null values contained within the `Age` column. Although the `Age` column contains 75 missing values, the vast majority of the items in this dataset contain perfectly good information for the age column.  If we dropped this column, we would be throwing out all that information just to deal with a small subset of missing values in that column!
+Note that while this makes sense for the `Cabins` column, this is not a good idea for dealing with the null values contained within the `Age` column. Although the `Age` column contains 75 missing values, the vast majority of the items in this dataset contain perfectly good information for the age column.  If we dropped this column, we would be throwing out all that information just to deal with a small subset of missing values in that column.
 
 #### Dropping rows
 
-In the above example, dropping all rows that contain a null value would be a very bad idea, because we would 3/4 of our data! Dropping rows makes more sense when the proportion of rows with missing values is very small compared to the size of the overall dataset -- it's okay to just throw out the missing values as long as it's not too many observations. There's no hard rule for exactly how many missing values is the right amount to throw out, and will vary project by project.  Think critically, and use your best judgment!
+In the above example, dropping all rows that contain a null value would be a very bad idea, because we would 3/4 of our data. Dropping rows makes more sense when the proportion of rows with missing values is very small compared to the size of the overall dataset -- it's okay to just throw out the missing values as long as it's not too many observations. There's no hard rule for exactly how many missing values is the right amount to throw out, and will vary project by project.  Think critically, and use your best judgment.
 
 To drop all rows containing missing values in a DataFrame, use `dataframe.dropna()`.  Note that this returns a copy of the dataframe with the rows in question dropped -- however, you can mutate the DataFrame in place by passing in `inplace=True` as a parameter to the method call. 
 
@@ -152,7 +152,7 @@ df['Fare'].fillna(df['Fare'].median())
 
 #### Categorical data
 
-With categorical data, this is harder, since we don't have summary statistics to lean on such as the median or the mean. In this case, if one categorical value is much more common than others, it is a valid strategy to replace missing values with this common value. However, make sure to examine your data first! If all the categorical values are equally common, picking one to replace all the missing values may do more harm than good by skewing the distribution and introducing some false signal into your dataset.
+With categorical data, this is harder, since we don't have summary statistics to lean on such as the median or the mean. In this case, if one categorical value is much more common than others, it is a valid strategy to replace missing values with this common value. However, make sure to examine your data first. If all the categorical values are equally common, picking one to replace all the missing values may do more harm than good by skewing the distribution and introducing some false signal into your dataset.
 
 ### Keep 
 
@@ -160,13 +160,13 @@ Sometimes, the knowledge that a value is missing can itself be informative for u
 
 #### Categorical data
 
-This one is the easiest -- just treat missing values as its own category! This may require replacing missing values with a string to denote this, as your model will still likely throw errors if the actual `NaN` values are not replaced. In that case, just replace the `NaN` values with the string `'NaN'`, or another string that makes it obvious that this value is `'missing'`.
+This one is the easiest -- just treat missing values as its own category. This may require replacing missing values with a string to denote this, as your model will still likely throw errors if the actual `NaN` values are not replaced. In that case, just replace the `NaN` values with the string `'NaN'`, or another string that makes it obvious that this value is `'missing'`.
 
 #### Numerical data
 
 Often, missing values inside a continuously-valued column will cause all sorts of havoc in your models, so leaving the `NaN`s alone isn't usually an option here.  Instead, consider using **_Coarse Classification_**, also referred to as **_Binning_**.  This allows us to convert the entire column from a numerical column to a categorical column by binning our data into categories. For instance, we could deal with the missing values in the `Age` column by creating a categorical column that separates each person into 10-year age ranges. Anybody between the ages of 0 and 10 would be a `1`, 11 to 20 would be a `2`, and so on.  
 
-Once we have binned the data in a new column, we can throw out the numerical version of the column, and just leave the missing values as one more valid category inside our new categorical column!
+Once we have binned the data in a new column, we can throw out the numerical version of the column, and just leave the missing values as one more valid category inside our new categorical column.
 
 
 ## Summary
@@ -175,4 +175,4 @@ In this section, we learned:
 
 * Strategies for detecting `NaN` values in pandas
 * Strategies for detecting missing data denoted by place holder values
-* How to deal with missing values by _Removing_, _Replacing_, or _Keeping_ them!
+* How to deal with missing values by _Removing_, _Replacing_, or _Keeping_ them
