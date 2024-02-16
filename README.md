@@ -82,13 +82,43 @@ To detect these sorts of placeholder values, start by checking for outliers -- t
 
 However, you may also find actual outliers (values that are _not impossible_, but _occur rarely_). Outliers, like missing or corrupt data, can adversely effect your Machine Learning models. Some of the ways in which you can identify outliers are: 
 
-- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard deviations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. 
+- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard deviations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. The code and output below illustrate this.
+
+> You will learn more about normal distribution later.
 
 
-<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/normal_sd_new.png" width="600">
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)  # Set the random seed for reproducibility
+data = np.random.normal(0, 1, 10000000)
+
+mean = np.mean(data)
+std = np.std(data)
+
+plt.hist(data, bins=30, density=True, alpha=0.7)
+
+# Plot the mean and standard deviations
+plt.axvline(mean, color='r', linestyle='dashed', linewidth=1, label='Mean')
+plt.axvline(mean - std, color='g', linestyle='dashed', linewidth=1, label='1 STD')
+plt.axvline(mean + std, color='g', linestyle='dashed', linewidth=1)
+plt.axvline(mean - 2*std, color='b', linestyle='dashed', linewidth=1, label='2 STD')
+plt.axvline(mean + 2*std, color='b', linestyle='dashed', linewidth=1)
+plt.axvline(mean - 3*std, color='m', linestyle='dashed', linewidth=1, label='3 STD')
+plt.axvline(mean + 3*std, color='m', linestyle='dashed', linewidth=1)
+
+plt.legend()
+plt.xlabel('Value')
+plt.ylabel('Density')
+plt.title('Histogram of the Dataset')
+plt.show()
+```
 
 
-> You will learn more about normal distribution in a later lesson. 
+    
+![png](index_files/index_3_0.png)
+    
 
 
 - **Interquartile range (IQR)**: If the data is not normally distributed, you can use the same method boxplots use to determine the outliers -- all observations that lie 1.5 times the IQR (difference between the 75th and the 25th percentiles of the data) away from the median in either direction are treated as outliers. 
@@ -116,7 +146,7 @@ Note that for categorical columns, it is much more likely to have a data diction
 
 ## Strategies for dealing with missing data
 
-Detecting missing values isn't enough -- we need to deal with them in order to move forward! We have three options for dealing with missing values -- removing them from the dataset, keeping them, or replacing them with another value. 
+Detecting missing values isn't enough -- we need to deal with them in order to move forward. We have three options for dealing with missing values -- removing them from the dataset, keeping them, or replacing them with another value. 
 
 ### Remove
 
@@ -128,11 +158,11 @@ The two main strategies for dealing with missing values are to drop columns or t
 
 Consider the output from the titanic dataset shown previously.  The `Cabins` column contains 687 missing values. The entire dataset only contains around 900 rows of data.  In this case, it makes more sense to just remove the `Cabins`  column from the dataset entirely.  
 
-Note that while this makes sense for the `Cabins` column, this is not a good idea for dealing with the null values contained within the `Age` column. Although the `Age` column contains 75 missing values, the vast majority of the items in this dataset contain perfectly good information for the age column.  If we dropped this column, we would be throwing out all that information just to deal with a small subset of missing values in that column!
+Note that while this makes sense for the `Cabins` column, this is not a good idea for dealing with the null values contained within the `Age` column. Although the `Age` column contains 75 missing values, the vast majority of the items in this dataset contain perfectly good information for the age column.  If we dropped this column, we would be throwing out all that information just to deal with a small subset of missing values in that column.
 
 #### Dropping rows
 
-In the above example, dropping all rows that contain a null value would be a very bad idea, because we would 3/4 of our data! Dropping rows makes more sense when the proportion of rows with missing values is very small compared to the size of the overall dataset -- it's okay to just throw out the missing values as long as it's not too many observations. There's no hard rule for exactly how many missing values is the right amount to throw out, and will vary project by project.  Think critically, and use your best judgment!
+In the above example, dropping all rows that contain a null value would be a very bad idea, because we would 3/4 of our data. Dropping rows makes more sense when the proportion of rows with missing values is very small compared to the size of the overall dataset -- it's okay to just throw out the missing values as long as it's not too many observations. There's no hard rule for exactly how many missing values is the right amount to throw out, and will vary project by project.  Think critically, and use your best judgment.
 
 To drop all rows containing missing values in a DataFrame, use `dataframe.dropna()`.  Note that this returns a copy of the dataframe with the rows in question dropped -- however, you can mutate the DataFrame in place by passing in `inplace=True` as a parameter to the method call. 
 
@@ -152,7 +182,7 @@ df['Fare'].fillna(df['Fare'].median())
 
 #### Categorical data
 
-With categorical data, this is harder, since we don't have summary statistics to lean on such as the median or the mean. In this case, if one categorical value is much more common than others, it is a valid strategy to replace missing values with this common value. However, make sure to examine your data first! If all the categorical values are equally common, picking one to replace all the missing values may do more harm than good by skewing the distribution and introducing some false signal into your dataset.
+With categorical data, this is harder, since we don't have summary statistics to lean on such as the median or the mean. In this case, if one categorical value is much more common than others, it is a valid strategy to replace missing values with this common value. However, make sure to examine your data first. If all the categorical values are equally common, picking one to replace all the missing values may do more harm than good by skewing the distribution and introducing some false signal into your dataset.
 
 ### Keep 
 
@@ -160,13 +190,13 @@ Sometimes, the knowledge that a value is missing can itself be informative for u
 
 #### Categorical data
 
-This one is the easiest -- just treat missing values as its own category! This may require replacing missing values with a string to denote this, as your model will still likely throw errors if the actual `NaN` values are not replaced. In that case, just replace the `NaN` values with the string `'NaN'`, or another string that makes it obvious that this value is `'missing'`.
+This one is the easiest -- just treat missing values as its own category. This may require replacing missing values with a string to denote this, as your model will still likely throw errors if the actual `NaN` values are not replaced. In that case, just replace the `NaN` values with the string `'NaN'`, or another string that makes it obvious that this value is `'missing'`.
 
 #### Numerical data
 
 Often, missing values inside a continuously-valued column will cause all sorts of havoc in your models, so leaving the `NaN`s alone isn't usually an option here.  Instead, consider using **_Coarse Classification_**, also referred to as **_Binning_**.  This allows us to convert the entire column from a numerical column to a categorical column by binning our data into categories. For instance, we could deal with the missing values in the `Age` column by creating a categorical column that separates each person into 10-year age ranges. Anybody between the ages of 0 and 10 would be a `1`, 11 to 20 would be a `2`, and so on.  
 
-Once we have binned the data in a new column, we can throw out the numerical version of the column, and just leave the missing values as one more valid category inside our new categorical column!
+Once we have binned the data in a new column, we can throw out the numerical version of the column, and just leave the missing values as one more valid category inside our new categorical column.
 
 
 ## Summary
@@ -175,4 +205,4 @@ In this section, we learned:
 
 * Strategies for detecting `NaN` values in pandas
 * Strategies for detecting missing data denoted by place holder values
-* How to deal with missing values by _Removing_, _Replacing_, or _Keeping_ them!
+* How to deal with missing values by _Removing_, _Replacing_, or _Keeping_ them
