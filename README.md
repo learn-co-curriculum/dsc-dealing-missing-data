@@ -82,13 +82,43 @@ To detect these sorts of placeholder values, start by checking for outliers -- t
 
 However, you may also find actual outliers (values that are _not impossible_, but _occur rarely_). Outliers, like missing or corrupt data, can adversely effect your Machine Learning models. Some of the ways in which you can identify outliers are: 
 
-- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard deviations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. 
+- **Standard deviation**: If the data is normally distributed (or nearly normal), you can use three standard deviations as a cutoff point. In a normal distribution, three standard deviations from the mean in both the directions cover 99.7% of the data, so any values outside this range are highly improbable, and can be safely discarded as outliers. The code and output below illustrate this.
+
+> You will learn more about normal distribution later.
 
 
-<img src="https://curriculum-content.s3.amazonaws.com/data-science/images/normal_sd_new.png" width="600">
+```python
+import numpy as np
+import matplotlib.pyplot as plt
+
+np.random.seed(42)  # Set the random seed for reproducibility
+data = np.random.normal(0, 1, 10000000)
+
+mean = np.mean(data)
+std = np.std(data)
+
+plt.hist(data, bins=30, density=True, alpha=0.7)
+
+# Plot the mean and standard deviations
+plt.axvline(mean, color='r', linestyle='dashed', linewidth=1, label='Mean')
+plt.axvline(mean - std, color='g', linestyle='dashed', linewidth=1, label='1 STD')
+plt.axvline(mean + std, color='g', linestyle='dashed', linewidth=1)
+plt.axvline(mean - 2*std, color='b', linestyle='dashed', linewidth=1, label='2 STD')
+plt.axvline(mean + 2*std, color='b', linestyle='dashed', linewidth=1)
+plt.axvline(mean - 3*std, color='m', linestyle='dashed', linewidth=1, label='3 STD')
+plt.axvline(mean + 3*std, color='m', linestyle='dashed', linewidth=1)
+
+plt.legend()
+plt.xlabel('Value')
+plt.ylabel('Density')
+plt.title('Histogram of the Dataset')
+plt.show()
+```
 
 
-> You will learn more about normal distribution in a later lesson. 
+    
+![png](index_files/index_3_0.png)
+    
 
 
 - **Interquartile range (IQR)**: If the data is not normally distributed, you can use the same method boxplots use to determine the outliers -- all observations that lie 1.5 times the IQR (difference between the 75th and the 25th percentiles of the data) away from the median in either direction are treated as outliers. 
