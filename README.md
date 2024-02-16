@@ -58,8 +58,8 @@ Parch 0
 Ticket 0
 Fare 0
 Cabin 687
-```
 Embarked 2
+```
 
 ### Placeholder values
 
